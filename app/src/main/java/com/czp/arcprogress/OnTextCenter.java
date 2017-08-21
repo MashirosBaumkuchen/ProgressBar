@@ -6,14 +6,13 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 
-/**
- * Created by caizepeng on 16/9/8.
- */
 public class OnTextCenter implements ArcProgress.OnCenterDraw {
-    private int textColor = Color.BLACK;
-    private int textSize = 80;
-    private int textResSize = 40;
-    private int textDesSize = 30;
+    private int textColor = Color.WHITE;
+    private int textHintColor = Color.argb(255, 49, 49, 49);
+    private int textSize = 138;
+    private int textSize2 = 88;
+    private int textResSize = 24;
+    private int textDesSize = 36;
 
     public OnTextCenter(int textColor, int textSize) {
         this.textColor = textColor;
@@ -25,40 +24,42 @@ public class OnTextCenter implements ArcProgress.OnCenterDraw {
     }
 
     @Override
-    public void draw(Canvas canvas, RectF rectF, float x, float y, float strokeWidth, int progress) {
+    public void draw(Canvas canvas, RectF rectF, float x, float y, float strokeWidth, float speedValue) {
         Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         Typeface font = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD);
         textPaint.setTypeface(font);
-        String progressStr = progress + ".";
-        String progressOverStr = "0";
+        String[] speed = (speedValue + "").split("\\.");
         String unit = "km/h";
-        String desc = "Max speed is 40.8";
+        String desc = "Max speed 6.8";
 
+        textPaint.setTextSize(textSize2);
+        float textOW = textPaint.measureText(speed[1]);
         textPaint.setTextSize(textSize);
-        float textW = textPaint.measureText(progressStr);
-        textPaint.setTextSize(textResSize);
-        float textOW = textPaint.measureText(progressOverStr);
+        float textW = textPaint.measureText("0");
+        float textW2 = textPaint.measureText(speed[0] + ".");
 
         // TODO: 2017/8/17 speed
+        float textX = x - (textW + textW2 + textOW) / 2;
+        float textY = y - ((textPaint.descent() + textPaint.ascent()) / 2);
+        textPaint.setColor(textHintColor);
+        canvas.drawText("0", textX, textY, textPaint);
+        textX = textX + textW;
         textPaint.setColor(textColor);
-        textPaint.setTextSize(textSize);
-        float textX = x - (textW + textOW) / 2;
-        float textY = y;
-        //float textY = y - ((textPaint.descent() + textPaint.ascent()) / 2)
-        canvas.drawText(progressStr, textX, textY, textPaint);
-        textPaint.setTextSize(textResSize);
-        float textResX = 2 * x - (textX + textOW);
-        float textResY = textY;
-        canvas.drawText(progressOverStr, textResX, textResY, textPaint);
+        canvas.drawText(speed[0] + ".", textX, textY, textPaint);
 
-        textPaint.setColor(Color.GRAY);
+        textPaint.setTextSize(textSize2);
+        float textResX = textX + textW2;
+        float textResY = textY;
+        canvas.drawText(speed[1], textResX, textResY, textPaint);
+
+        textPaint.setTextSize(textResSize);
         float textUnitX = x - (textPaint.measureText(unit)) / 2;
-        float textUnitY = textResY - (textPaint.descent() + textPaint.ascent()) * 2;
+        float textUnitY = textResY - (textPaint.descent() + textPaint.ascent()) * 4;
         canvas.drawText(unit, textUnitX, textUnitY, textPaint);
 
         textPaint.setTypeface(Typeface.DEFAULT);
         textPaint.setTextSize(textDesSize);
-        textPaint.setColor(Color.BLUE);
+        textPaint.setColor(Color.argb(255, 246, 108, 28));
         float textDescX = x - (textPaint.measureText(desc)) / 2;
         float textDescY = textUnitY - (textPaint.descent() + textPaint.ascent()) * 2;
         canvas.drawText(desc, textDescX, textDescY, textPaint);

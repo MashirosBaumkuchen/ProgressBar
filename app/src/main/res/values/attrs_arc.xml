@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="ArcProgress">
-        <attr name="borderWidth" format="dimension"></attr>
-        <attr name="unprogresColor" format="color"></attr>
-        <attr name="progressLineColor" format="color"></attr>
-        <attr name="progressColor" format="color"></attr>
-        <attr name="progressOverColor" format="color"></attr>
-        <attr name="progressInnerColor" format="color"></attr>
-        <attr name="tickWidth" format="dimension"></attr>
-        <attr name="tickDensity" format="integer"></attr>
-        <attr name="bgShow" format="boolean"></attr>
-        <attr name="radius" format="dimension"></attr>
-        <attr name="arcbgColor" format="color"></attr>
-        <attr name="degree" format="integer"></attr>
-        <attr name="arcCapRound" format="boolean"></attr>
-        <attr name="innerDis" format="integer"></attr>
-        <attr name="progressStyle" format="enum">
-            <enum name="tick" value="1"></enum>
-            <enum name="arc" value="0"></enum>
-        </attr>
+        <attr name="borderWidth" format="dimension" />
+        <attr name="innerBorderWidth" format="dimension" />
+        <attr name="lineLength" format="dimension" />
+        <attr name="progressLineColor" format="color" />
+        <attr name="tickWidth" format="dimension" />
+        <attr name="radius" format="dimension" />
+        <attr name="degree" format="integer" />
+        <attr name="maxSpeed" format="float" />
+        <attr name="innerDis" format="dimension" />
     </declare-styleable>
 </resources>

@@ -7,6 +7,6 @@
     <color name="progressOverColor">#EBA180</color>
     <color name="progressLineColor">#000000</color>
     <color name="progressInnerColor">#CCCCCC</color>
-    <color name="progressColorBlue">#3366FF</color>
+    <color name="progressColorBlue">#3370ff</color>
     <color name="progressColorGreen">#66FF33</color>
 </resources>
