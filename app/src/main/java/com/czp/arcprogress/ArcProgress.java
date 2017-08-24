@@ -23,30 +23,27 @@ import java.text.DecimalFormat;
 public class ArcProgress extends ProgressBar {
     private String TAG = "ArcProgress";
     // TODO: 2017/8/18
-    private final int DEFAULT_LIGHTLINE = dp2px(4);
     private final int DEFAULT_LINEHEIGHT = dp2px(8);//外圈宽度
     private final int DEFAULT_INNER_LINEHEIGHT = dp2px(24);//内圈宽度
-    private final int DEFAULT_mTickWidth = dp2px(2);
     private final int DEFAULT_mRadius = dp2px(100);//外圈半径
     private final int DEFAULT_mInnerDis = dp2px(2);//内外圈间距
-    private final int DEFAULT_mProgressLineColor = Color.BLUE;
     private final int DEFAULT_OFFSETDEGREE = 90;//默认扇形缺失角度
-    private final float DEFAULT_MAX_SPEED = 18.0f;
-
+    private final float DEFAULT_MAX_SPEED = 18.0f;//默认maxSpeed
     private final int DEFAULT_LINELENGTH = dp2px(7);//默认刻度线长度
     private final int DEFAULT_TICK_MARK = dp2px(16);//刻度线距外圈距离
+    private final int DEFAULT_INNER_START_LENGTH = dp2px(7);//inner start 露出长度
+    private final int DEFAULT_OVER_START_LENGTH  =dp2px(10);//over start 露出三角形高度
+    private final int DEFAULT_LIGHTLINE = dp2px(4);
 
     private Context context;
-    private float mRadius;
-    private int mBoardWidth;
+    private float mRadius;//外圈半径
+    private int mBoardWidth;//外圈宽度
     private int mLightLine;
-    private int mInnerBoardWidth;
-    private int mDegree = DEFAULT_OFFSETDEGREE;
+    private int mInnerBoardWidth;//内圈宽度
+    private int mDegree = DEFAULT_OFFSETDEGREE;//默认缺口角度
+    private int lineLength;//刻度线长度
     private RectF mArcRectf;
     private RectF mArcRectfInner;
-    private int lineLength;//刻度线长度
-
-    // TODO: 2017/8/21
     private RectF mILRectf;
     private RectF mOLRectf;
 
@@ -245,14 +242,14 @@ public class ArcProgress extends ProgressBar {
         mLinePaint.setColor(Color.argb(255, 51, 102, 255));
         canvas.rotate(targetmDegree, x, y);
         canvas.drawLine(x, y - mRadius - mBoardWidth / 2,
-                x, y - mRadius + mDis + mInnerBoardWidth + mBoardWidth + dp2px(3), mLinePaint);
+                x, y - mRadius + mDis + mInnerBoardWidth + mBoardWidth / 2 + DEFAULT_INNER_START_LENGTH, mLinePaint);// TODO: 2017/8/24 innner 露出 宽度 dp2px(7)
 
         //overSpeed位置 三角形
         mLinePaint.setColor(Color.argb(255, 246, 108, 28));
         canvas.rotate(360 - mDegree - overmDegree - targetmDegree + 2, x, y);
         if (overmDegree < 2) {
             canvas.drawLine(x, y - mRadius - mBoardWidth / 2,//2刻度线的一半
-                    x, y - mRadius + mBoardWidth + dp2px(6), mLinePaint);
+                    x, y - mRadius + mBoardWidth / 2 + DEFAULT_OVER_START_LENGTH, mLinePaint);// TODO: 2017/8/24 overspeed处 露出 宽度 dp2px(10)
         } else {
             Path path = new Path();
             path.moveTo(x, y - mRadius - mBoardWidth / 2);// 此点为多边形的起点
