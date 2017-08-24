@@ -24,13 +24,13 @@ public class OnTextCenter implements ArcProgress.OnCenterDraw {
     }
 
     @Override
-    public void draw(Canvas canvas, RectF rectF, float x, float y, float strokeWidth, float speedValue) {
+    public void draw(Canvas canvas, RectF rectF, float x, float y, float speedValue, float maxSpeed) {
         Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         Typeface font = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD);
         textPaint.setTypeface(font);
         String[] speed = (speedValue + "").split("\\.");
         String unit = "km/h";
-        String desc = "Max speed 6.8";
+        String desc = "Max speed " + maxSpeed;
 
         textPaint.setTextSize(textSize2);
         float textOW = textPaint.measureText(speed[1]);
@@ -54,7 +54,7 @@ public class OnTextCenter implements ArcProgress.OnCenterDraw {
 
         textPaint.setTextSize(textResSize);
         float textUnitX = x - (textPaint.measureText(unit)) / 2;
-        float textUnitY = textResY - (textPaint.descent() + textPaint.ascent()) * 4;
+        float textUnitY = textResY - (textPaint.descent() + textPaint.ascent()) * 3;
         canvas.drawText(unit, textUnitX, textUnitY, textPaint);
 
         textPaint.setTypeface(Typeface.DEFAULT);

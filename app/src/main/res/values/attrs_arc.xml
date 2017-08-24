@@ -4,8 +4,6 @@
         <attr name="borderWidth" format="dimension" />
         <attr name="innerBorderWidth" format="dimension" />
         <attr name="lineLength" format="dimension" />
-        <attr name="progressLineColor" format="color" />
-        <attr name="tickWidth" format="dimension" />
         <attr name="radius" format="dimension" />
         <attr name="degree" format="integer" />
         <attr name="maxSpeed" format="float" />

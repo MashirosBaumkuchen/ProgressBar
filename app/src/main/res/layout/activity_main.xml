@@ -14,25 +14,34 @@
 
     <com.czp.arcprogress.ArcProgress
         android:id="@+id/myProgress"
-        android:layout_width="240dp"
-        android:layout_height="240dp"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        app:radius="120dp"
+        app:innerBorderWidth="30dp"
+        app:lineLength="8dp"
+        app:borderWidth="9dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        app:radius="100dp"
-        app:lineLength="6dp"
-        app:innerBorderWidth="24dp"
-        app:tickWidth="2dp" />
+        android:layout_centerVertical="true"/>
 
     <SeekBar
         android:id="@+id/seekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
+        android:layout_above="@+id/seekBar2" />
 
     <SeekBar
         android:id="@+id/seekBar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="random data" />
 
 </RelativeLayout>
