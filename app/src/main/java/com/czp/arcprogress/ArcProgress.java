@@ -22,7 +22,7 @@ import java.text.DecimalFormat;
 
 public class ArcProgress extends ProgressBar {
     private String TAG = "ArcProgress";
-    // TODO: 2017/8/18
+
     private final int DEFAULT_LINEHEIGHT = dp2px(8);//外圈宽度
     private final int DEFAULT_INNER_LINEHEIGHT = dp2px(24);//内圈宽度
     private final int DEFAULT_mRadius = dp2px(100);//外圈半径
@@ -32,7 +32,7 @@ public class ArcProgress extends ProgressBar {
     private final int DEFAULT_LINELENGTH = dp2px(7);//默认刻度线长度
     private final int DEFAULT_TICK_MARK = dp2px(16);//刻度线距外圈距离
     private final int DEFAULT_INNER_START_LENGTH = dp2px(7);//inner start 露出长度
-    private final int DEFAULT_OVER_START_LENGTH  =dp2px(10);//over start 露出三角形高度
+    private final int DEFAULT_OVER_START_LENGTH = dp2px(10);//over start 露出三角形高度
     private final int DEFAULT_LIGHTLINE = dp2px(4);
 
     private Context context;
@@ -125,7 +125,7 @@ public class ArcProgress extends ProgressBar {
         mInnerPaint.setStrokeWidth(mInnerBoardWidth);
         mInnerPaint.setStyle(Paint.Style.STROKE);
 
-        // TODO: 2017/8/21 刻度线
+        // 2017/8/21 刻度线
         mOuterLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mOuterLinePaint.setStrokeWidth(dp2px(9));
         mOuterLinePaint.setStyle(Paint.Style.STROKE);
@@ -160,9 +160,7 @@ public class ArcProgress extends ProgressBar {
         float roate = getProgress() * 1.0f / getMax();
         float roate2 = (100 - getOverProgress()) * 1.0f / getMax();
         float x = (ArcProgress.this.getRight() - ArcProgress.this.getLeft()) / 2;
-//        float x = mArcRectf.right / 2 + mBoardWidth + mDis;
         float y = (ArcProgress.this.getBottom() - ArcProgress.this.getTop()) / 2;
-//        float y = mArcRectf.right / 2 + mBoardWidth + mDis;
         if (mOnCenter != null) {
             if (mCenterCanvas == null) {
                 mCenterBitmap = Bitmap.createBitmap(ArcProgress.this.getRight() - ArcProgress.this.getLeft(), ArcProgress.this.getBottom() - ArcProgress.this.getTop(), Bitmap.Config.ARGB_8888);
@@ -177,7 +175,7 @@ public class ArcProgress extends ProgressBar {
         float targetmDegree = (360 - mDegree) * roate;
         float overmDegree = (360 - mDegree) * roate2;
 
-        // TODO: 2017/8/18 仪表盘内部画笔
+        // 2017/8/18 仪表盘内部画笔
         float shaderFlag = Float.valueOf(df.format((targetmDegree) / 360.0f)) > 0.01f ? Float.valueOf(df.format((targetmDegree) / 360.0f)) : 0.03f;
         Shader innerShader = new SweepGradient(x, y, new int[]{Color.argb(0, 255, 255, 255), Color.argb(255, 51, 102, 255), Color.argb(255, 51, 102, 255)},
                 new float[]{0f, shaderFlag, 1f});
@@ -187,7 +185,7 @@ public class ArcProgress extends ProgressBar {
         mInnerPaint.setShader(innerShader);
         canvas.drawArc(mArcRectfInner, 90 + angle, targetmDegree, false, mInnerPaint);
 
-        // TODO: 2017/8/18 仪表盘常规速度部分1
+        // 2017/8/18 仪表盘常规速度部分1
         Shader speedShader = new SweepGradient(x, y, new int[]{Color.argb(255, 1, 180, 255), Color.argb(255, 51, 102, 255), Color.argb(255, 51, 102, 255)},
                 new float[]{0f, shaderFlag, 1f});
         Matrix speedMatrix = new Matrix();
@@ -196,7 +194,7 @@ public class ArcProgress extends ProgressBar {
         mArcPaint.setShader(speedShader);
         canvas.drawArc(mArcRectf, 90 + angle, targetmDegree, false, mArcPaint);
 
-        // TODO: 2017/8/18 仪表盘常规速度部分2
+        // 2017/8/18 仪表盘常规速度部分2
         shaderFlag = Float.valueOf(df.format((360 - mDegree - overmDegree - 5 - targetmDegree) / 360.0f)) > 0.01f ? Float.valueOf(df.format((360 - mDegree - overmDegree - 5 - targetmDegree) / 360.0f)) : 0.03f;
         Shader speedShader2 = new SweepGradient(x, y, new int[]{Color.argb(255, 166, 166, 166), Color.argb(255, 28, 28, 28), Color.argb(255, 28, 28, 28)},
                 new float[]{0f, shaderFlag, 1f});
@@ -206,7 +204,7 @@ public class ArcProgress extends ProgressBar {
         mArcPaint.setShader(speedShader2);
         canvas.drawArc(mArcRectf, 90 + angle + targetmDegree, 360 - mDegree - overmDegree - targetmDegree, false, mArcPaint);
 
-        // TODO: 2017/8/18 仪表盘超速部分
+        // 2017/8/18 仪表盘超速部分
         shaderFlag = Float.valueOf(df.format((overmDegree) / 360.0f)) > 0.01f ? Float.valueOf(df.format((overmDegree) / 360.0f)) : 0.03f;
         Shader overSpeedShader = new SweepGradient(x, y, new int[]{Color.argb(255, 246, 108, 28), Color.argb(255, 238, 153, 29), Color.argb(255, 238, 153, 29)},
                 new float[]{0f, shaderFlag, 1f});
@@ -216,7 +214,7 @@ public class ArcProgress extends ProgressBar {
         mOverSpeedPaint.setShader(overSpeedShader);
         canvas.drawArc(mArcRectf, 90 + angle + 360 - mDegree - overmDegree + 2, overmDegree, false, mOverSpeedPaint);
 
-        // TODO: 2017/8/21 刻度线
+        // 2017/8/21 刻度线
         mOuterLinePaint.setShader(speedShader);
         mOuterLinePaint.setStrokeWidth(lineLength);
         int lineDegree = 90 + angle + 5;
@@ -231,7 +229,7 @@ public class ArcProgress extends ProgressBar {
             lineDegree += 10;
         }
 
-        // TODO: 2017/8/18 速度指针前端直线
+        // 2017/8/18 速度指针前端直线
         //起始位置
         mLinePaint.setColor(Color.argb(255, 166, 166, 166));
         canvas.rotate(180 + angle, x, y);
@@ -242,14 +240,14 @@ public class ArcProgress extends ProgressBar {
         mLinePaint.setColor(Color.argb(255, 51, 102, 255));
         canvas.rotate(targetmDegree, x, y);
         canvas.drawLine(x, y - mRadius - mBoardWidth / 2,
-                x, y - mRadius + mDis + mInnerBoardWidth + mBoardWidth / 2 + DEFAULT_INNER_START_LENGTH, mLinePaint);// TODO: 2017/8/24 innner 露出 宽度 dp2px(7)
+                x, y - mRadius + mDis + mInnerBoardWidth + mBoardWidth / 2 + DEFAULT_INNER_START_LENGTH, mLinePaint);//
 
         //overSpeed位置 三角形
         mLinePaint.setColor(Color.argb(255, 246, 108, 28));
         canvas.rotate(360 - mDegree - overmDegree - targetmDegree + 2, x, y);
         if (overmDegree < 2) {
             canvas.drawLine(x, y - mRadius - mBoardWidth / 2,//2刻度线的一半
-                    x, y - mRadius + mBoardWidth / 2 + DEFAULT_OVER_START_LENGTH, mLinePaint);// TODO: 2017/8/24 overspeed处 露出 宽度 dp2px(10)
+                    x, y - mRadius + mBoardWidth / 2 + DEFAULT_OVER_START_LENGTH, mLinePaint);//
         } else {
             Path path = new Path();
             path.moveTo(x, y - mRadius - mBoardWidth / 2);// 此点为多边形的起点
@@ -279,7 +277,6 @@ public class ArcProgress extends ProgressBar {
                 (ArcProgress.this.getBottom() - ArcProgress.this.getTop()) / 2 - mRadius + mDis + mBoardWidth / 2 + mInnerBoardWidth / 2,
                 (ArcProgress.this.getRight() - ArcProgress.this.getLeft()) / 2 + mRadius - mDis - mBoardWidth / 2 - mInnerBoardWidth / 2,
                 (ArcProgress.this.getBottom() - ArcProgress.this.getTop()) / 2 + mRadius - mDis - mBoardWidth / 2 - mInnerBoardWidth / 2);
-        // TODO: 2017/8/21
         mILRectf = new RectF((ArcProgress.this.getRight() - ArcProgress.this.getLeft()) / 2 - mRadius,
                 (ArcProgress.this.getBottom() - ArcProgress.this.getTop()) / 2 - mRadius,
                 (ArcProgress.this.getRight() - ArcProgress.this.getLeft()) / 2 + mRadius,
@@ -312,15 +309,7 @@ public class ArcProgress extends ProgressBar {
     }
 
     public interface OnCenterDraw {
-        /**
-         * @param canvas
-         * @param rectF      圆弧的Rect
-         * @param x          圆弧的中心x
-         * @param y          圆弧的中心y
-         * @param speedValue 当前进度
-         * @param maxSpeed
-         */
-        public void draw(Canvas canvas, RectF rectF, float x, float y, float speedValue, float maxSpeed);
+        void draw(Canvas canvas, RectF rectF, float x, float y, float speedValue, float maxSpeed);
     }
 
     @Override
@@ -331,10 +320,6 @@ public class ArcProgress extends ProgressBar {
             mCenterBitmap = null;
         }
 
-    }
-
-    public int speed2Degree(float speed) {
-        return (int) ((360 - mDegree) * speed * 1.0f / getMaxSpeed());
     }
 
     public float getMaxSpeed() {
@@ -358,14 +343,8 @@ public class ArcProgress extends ProgressBar {
         this.mSpeedValue = Float.parseFloat(df.format(mSpeedValue));
         if (preSpeedValue != mSpeedValue) {
             if (speedGradient != null) speedGradient.interrupt();
-            // TODO: 2017/8/24  standard usage
             speedGradient = new SpeedGradient(this, preSpeedValue, mSpeedValue, maxSpeed, SpeedGradient.FLAG_SPEED);
             speedGradient.start();
-
-            // TODO: 2017/8/24 debug
-//            this.setProgress((int) (100 * mSpeedValue / maxSpeed));
-//            setmShowSpeed(mSpeedValue);
-
             preSpeedValue = mSpeedValue;
         }
     }
@@ -379,13 +358,8 @@ public class ArcProgress extends ProgressBar {
         this.mOverSpeedValue = Float.parseFloat(df.format(mOverSpeedValue));
         if (preOverSpeedValue != mOverSpeedValue) {
             if (overSpeedGradient != null) overSpeedGradient.interrupt();
-            // TODO: 2017/8/24  standard usage
             overSpeedGradient = new SpeedGradient(this, preOverSpeedValue, mOverSpeedValue, maxSpeed, SpeedGradient.FLAG_OVERSPEED);
             overSpeedGradient.start();
-
-            // TODO: 2017/8/24 debug
-//            this.setOverProgress((int) (100 * mOverSpeedValue / maxSpeed));
-
             preOverSpeedValue = mOverSpeedValue;
         }
     }

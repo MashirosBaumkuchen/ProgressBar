@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         // TODO: 2017/8/24 standard usage
         // before setmSpeedValue, do setMaxSpeed & setmOverSpeedValue
         mProgress.setOnCenterDraw(new OnTextCenter());
-        mProgress.setMaxSpeed(7.2f);
-        mProgress.setmOverSpeedValue(5.0f);
-        mProgress.setmSpeedValue(2.7f);
+        mProgress.setMaxSpeed(20.f);
+        mProgress.setmOverSpeedValue(16.f);
+        mProgress.setmSpeedValue(12.f);
 
         // TODO: 2017/8/24 standard usage
         button = (Button) findViewById(R.id.button);
